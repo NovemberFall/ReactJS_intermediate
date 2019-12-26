@@ -292,16 +292,41 @@ class App extends Component {
 ![](img/2019-12-26-11-39-38.png)
 - change to false
 ![](img/2019-12-26-11-39-59.png)
+---
 
+- another way
 ```js
+class App extends Component {
+  render() {
+    const name = 'John Smith';
+    const loading = false;
+    const showName = true;
+
+    return (
+      <div className="App">
+        <h1>My App</h1>
+        {loading ? <h4>Loading...</h4> : <h1>Hello {showName ? name : null}</h1>}
+      </div>
+    );
+  }
+}
 ```
+- another way
 ```js
+class App extends Component {
+  render() {
+    const name = 'John Smith';
+    const loading = false;
+    const showName = true;
+
+    return (
+      <div className="App">
+        <h1>My App</h1>
+        {loading ? <h4>Loading...</h4> : <h1>Hello {showName && name}</h1>}
+      </div>
+    );
+  }
+}
+export default App;
 ```
-```js
-```
-```js
-```
-```js
-```
-```js
-```
+
