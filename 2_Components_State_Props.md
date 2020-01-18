@@ -222,3 +222,8 @@ export class Navbar extends Component {
 ```
 ![](img/2019-12-26-14-12-45.png)
 - this time, we change the type to be array, so there is no warning
+---
+
+
+## Getting Started With Component State
+![](img/2020-01-18-15-21-05.png)
