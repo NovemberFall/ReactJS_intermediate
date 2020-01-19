@@ -618,3 +618,103 @@ export default App;
 
 
 ## Stateless Funcional Components
+- Good for simple content
+-
+- update Navbar.js
+```js
+//Stateless Funcional Components
+import React from 'react'
+import PropTypes from 'prop-types'
+const Navbar = (props) => {
+    return (
+        <nav className='navbar bg-primary'>
+            <h1>
+                <i className={props.icon} /> {props.title}
+            </h1>
+        </nav>
+    );
+}
+/* 
+1. we pass defaultProps into Navbar self, Navbar receive props from self, 
+2. and assign props.icon to className, and assigns props.title to value
+*/
+
+Navbar.defaultProps = {
+    title: 'Github Finder',
+    icon: 'fab fa-github'
+};
+
+Navbar.propTypes = {
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired
+};
+
+export default Navbar
+```
+---
+
+
+
+
+## refactoring UserItem.js
+```js
+//Stateless Funcional Components
+import React from 'react';
+import PropTypes from 'prop-types'
+
+const UserItem = ({ user: { login, avatar_url, html_url } }) => {
+
+    return (
+        <div className="card text-center">
+            <img
+                src={avatar_url} alt=""
+                className="round-img"
+                style={{
+                    width: '60px'
+                }}
+            />
+            <h3>{login}</h3>
+            <div>
+                <a href={html_url} className="btn btn-dark btn-sm my-1">
+                    More
+                    </a>
+            </div>
+        </div>
+    )
+
+}
+
+UserItem.prototype = {
+    user: PropTypes.object.isRequired,
+}
+export default UserItem
+```
+-
+- update Navbar.js
+```js
+//Stateless Funcional Components
+import React from 'react'
+import PropTypes from 'prop-types'
+const Navbar = ({ icon, title }) => {
+    return (
+        <nav className='navbar bg-primary'>
+            <h1>
+                <i className={icon} /> {title}
+            </h1>
+        </nav>
+    );
+}
+
+Navbar.defaultProps = {
+    title: 'Github Finder',
+    icon: 'fab fa-github'
+};
+
+Navbar.propTypes = {
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired
+};
+
+export default Navbar
+```
+- still same result
