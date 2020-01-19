@@ -231,3 +231,124 @@ export default UserItem
 - `const UserItem = ({ user: { login, avatar_url, html_url } }) => `, inside `({user: ...})` we just assign `login, avatar_url, html_url` from `Users`, from `res.data` in App.js
 - then, we render a new component
 ![](img/2020-01-19-11-57-01.png)
+---
+
+
+
+
+## Spinner Component & Refactoring
+- added `spinner.gif` into layout folder
+![](img/2020-01-19-12-19-27.png)
+- create `Spinner.js` in layout
+```js
+import React, { Fragment } from 'react';
+import spinner from './spinner.gif';
+
+const Spinner = () => {
+    return (
+        <Fragment>
+            <img src={spinner} alt="Loading..."
+                style={{ width: '200px', margin: 'auto', display: 'block' }}
+            />
+        </Fragment>
+    )
+}
+export default Spinner
+```
+![](img/2020-01-19-13-20-07.png)
+-
+- refactoring User.js
+```js
+//Spinner Component & Refactoring
+import React, { Component } from 'react';
+import UserItem from './UserItem';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types'
+
+const Users = ({ users, loading }) => {
+    if (loading) {
+        return <Spinner />
+    } else {
+        return (
+            <div style={userStyle}>
+                {users.map(user => (
+                    <UserItem key={user.id} user={user} />
+                ))}
+            </div>
+        )
+    }
+}
+Users.prototype = {
+    users: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
+}
+
+const userStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gridGap: '1rem'
+}
+export default Users
+```
+---
+
+
+## Environment Variables
+
+- input `github register application`
+![](img/2020-01-19-13-33-11.png)
+
+- go to `https://developer.github.com/apps/building-oauth-apps/` guide
+![](img/2020-01-19-13-47-41.png)
+- click `registerion`
+-
+- create enviornment variables
+![](img/2020-01-19-13-48-53.png)
+- `.env.local`
+```js
+REACT_APP_GITHUB_CILENT_ID='cf7d6b4d5dac79bed11a'
+REACT_APP_GITHUB_CILENT_SECRET='45faaabbe49fabea3034104d4db16ef67e594a0a'
+```
+- Note: `.gitignore` has includled it
+![](img/2020-01-19-13-50-10.png)
+- update App
+```js
+//HTTP Requests & Updating State
+import React, { Component } from 'react';
+import Navbar from './components/layout/Navbar';
+import Users from './components/users/Users';
+import axios from 'axios';
+import './App.css';
+
+class App extends Component {
+  state = {
+    users: [],
+    loading: false
+  }
+
+  async componentDidMount() {
+    console.log(process.env.REACT_APP_GITHUB_CILENT_SECRET);
+    this.setState({ loading: true });
+    const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CILENT_ID}
+    &client_secret=${process.env.REACT_APP_GITHUB_CILENT_SECRET}`);
+
+    // console.log(res.data);
+    this.setState({ users: res.data, loading: false });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+        <div className='container'>
+          <Users loading={this.state.loading} users={this.state.users} />
+        </div>
+
+      </div>
+    );
+  }
+}
+export default App;
+```
+![](img/2020-01-19-14-37-22.png)
+
