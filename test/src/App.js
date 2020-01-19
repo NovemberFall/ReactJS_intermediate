@@ -139,9 +139,103 @@
 
 
 
-//Components Props && PropTyeps
+// //Components Props && PropTyeps
+// import React, { Component } from 'react';
+// import Navbar from './components/layout/Navbar';
+// import './App.css';
+
+// class App extends Component {
+//   render() {
+
+//     return (
+//       <div className="App">
+//         <Navbar />
+//         {/* <Navbar title="Github Finder" icon='fab fa-github' /> */}
+//         {/* 'fab fa-github' , is importing from fontawesome  */}
+//       </div>
+//     );
+//   }
+// }
+// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //Getting Started With Component State
+// import React, { Component } from 'react';
+// import Navbar from './components/layout/Navbar';
+// import Users from './components/users/Users';
+// import './App.css';
+
+// class App extends Component {
+//   render() {
+
+//     return (
+//       <div className="App">
+//         <Navbar />
+//         <Users />
+//       </div>
+//     );
+//   }
+// }
+// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Getting Started With Component State
 import React, { Component } from 'react';
 import Navbar from './components/layout/Navbar';
+import Users from './components/users/Users';
 import './App.css';
 
 class App extends Component {
@@ -150,8 +244,10 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        {/* <Navbar title="Github Finder" icon='fab fa-github' /> */}
-        {/* 'fab fa-github' , is importing from fontawesome  */}
+        <div className='container'>
+          <Users />
+        </div>
+
       </div>
     );
   }
