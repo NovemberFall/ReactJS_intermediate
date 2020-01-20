@@ -1,5 +1,5 @@
 - install
-- `npx create-react-app test`
+- `npx create-react-app github-finder`
 ---
 
 ## clean up & prepare 
